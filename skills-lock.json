@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "canvas-cowork": {
+      "source": "flowith-ai/canvas-cowork",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "0c479f8b917895dfbcc215b40ab8b12a0bf9257488787f5ad5f498b0bfa52db7"
+    }
+  }
+}
