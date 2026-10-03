@@ -1,0 +1,14 @@
+{
+  "name": "dots-with-applewatch",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Apple Watch 上的 Dots 动画，本地预览并导出 MP4",
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "render": "node scripts/render-video.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  }
+}

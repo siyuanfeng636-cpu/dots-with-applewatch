@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dots on Apple Watch</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #c4ecec; }
+    body { display: grid; place-items: center; }
+    canvas { width: min(100vw, 100vh); height: min(100vw, 100vh); display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="stage"></canvas>
+  <script type="module">
+    import { createScene, loadImage, DURATION } from './src/dots.js';
+
+    const params = new URLSearchParams(location.search);
+    const canvas = document.getElementById('stage');
+
+    const ready = loadImage('./assets/cucumber.png').then((img) => {
+      const scene = createScene(canvas, img);
+      // 导出视频时由脚本逐帧调用 render；?t=3.5 可以定格在某一秒
+      window.__dots = { render: scene.render, DURATION, canvas };
+      if (params.has('export')) return;
+      if (params.has('t')) return scene.render(Number(params.get('t')));
+      const t0 = performance.now();
+      const loop = (now) => {
+        scene.render(((now - t0) / 1000) % (DURATION + 1));
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    });
+    window.__dotsReady = ready;
+  </script>
+</body>
+</html>
