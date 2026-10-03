@@ -12,6 +12,8 @@ const { values } = parseArgs({
     fps: { type: 'string', default: '30' },
     out: { type: 'string', default: 'media/dots-applewatch.mp4' },
     poster: { type: 'string', default: 'media/poster.png' },
+    page: { type: 'string', default: 'index.html' },
+    'poster-at': { type: 'string', default: '7.8' },
   },
 });
 const fps = Number(values.fps);
@@ -23,7 +25,7 @@ const browser = await chromium.launch(
 
 try {
   const page = await browser.newPage();
-  await page.goto(`http://127.0.0.1:${port}/index.html?export`);
+  await page.goto(`http://127.0.0.1:${port}/${values.page}?export`);
   await page.evaluate(() => window.__dotsReady);
   const duration = await page.evaluate(() => window.__dots.DURATION);
 
@@ -55,7 +57,7 @@ try {
   await done;
   console.log(`\n视频：${values.out}`);
 
-  await writeFile(values.poster, Buffer.from(await frame(7.8), 'base64'));
+  await writeFile(values.poster, Buffer.from(await frame(Number(values['poster-at'])), 'base64'));
   console.log(`封面：${values.poster}`);
 } finally {
   await browser.close();

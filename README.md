@@ -8,6 +8,14 @@
 
 成品视频：[`media/dots-applewatch.mp4`](media/dots-applewatch.mp4)（1080×1080，30fps，9 秒）
 
+## 语音助手版
+
+参考 Apple Watch Ultra 上的语音助手演示：深色屏幕中间是黄瓜侦探头像，依次经历“聆听 → 思考 → 回答”三段动效，底部是麦克风和挂断键。
+
+- 预览：`npm start` 后打开 http://127.0.0.1:5173/assistant.html
+- 导出：`npm run render -- --page assistant.html --out media/dots-assistant.mp4 --poster media/dots-assistant-poster.png --poster-at 5`
+- 绘制逻辑在 `src/assistant.js`，头像图片是 `assets/cucumber-warm.png`，时间轴在文件顶部的 `T` 里。
+
 ## 本地运行
 
 需要 Node.js 18+；导出视频还需要 `ffmpeg`（macOS：`brew install ffmpeg`）。
